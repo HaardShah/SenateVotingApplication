@@ -1,0 +1,34 @@
+<nav class="navbar navbar-light bg-light">
+  <%= link_to admin_voting_results_path, class: "btn btn-outline-primary" do %>
+    <i>Back</i>
+  <%end %>
+<!--  <a class="navbar-brand" href="<%#= admin_voting_results_path %>">Electoral Commissioner</a>-->
+  <div>
+    <%= link_to add_candidates_path, class: "btn btn-outline-primary" do %>
+      <i>Add Candidate</i>
+    <%end %>
+    <%= link_to recount_path, class: "btn btn-outline-primary" do %>
+      <i>Recount</i>
+    <%end %>
+    <%= link_to root_path, class: "btn btn-outline-danger" do %>
+      <i >Logout</i>
+    <%end %>
+  </div>
+</nav>
+
+<% if flash.any? %>
+  <% flash.each do |key, value| %>
+    <% print "#{flash_class(key)}\n" %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+  <% end %>
+<% end %>
+
+<!--<div class="login_page_div">-->
+<div class="flex-container">
+  <%= form_with model: @candidate, url: add_candidates_path, method: :post, local: true, data: { turbo: false }, scope: :candidate do |form| %>
+    <%= render "#{@candidate.current_step}_step", :form => form%>
+  <% end %>
+</div>
+
